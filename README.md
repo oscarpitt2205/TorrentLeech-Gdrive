@@ -1,4 +1,4 @@
-# for support join here [TorrentLeech-Gdrive](https://telegram.dog/GBotStore)
+# for support join here [TorrentLeech-Gdrive](https://telegram.dog/GBotStore) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgautamajay52%2FTorrentLeech-Gdrive&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/gautamajay52/TorrentLeech-Gdrive)
 # working example group [Leech Here](https://telegram.dog/GBotStore)
 
 # Telegram Torrent Leecher 🔥🤖
@@ -29,8 +29,6 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
 -   [ ] Adding mp3 files support while playlist downloading.
 -   [ ] Password support while Unarchiving the files.
 -   [ ] Selection of required files during leeching the big files using aria(/leech command)
-
-### Credit goes to SpEcHiDe for his Publicleech repo.
 
 ## installing...
 
@@ -65,19 +63,17 @@ cd torrentleech-gdrive
 - Install requirements
 For Debian based distros
 ```
-sudo apt install python3
-
 sudo snap install docker
 ```
 Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
 
 ## Setting up config file
 ```
-cp tobrot/g_config.py tobrot/config.py
+cp sample_config.env config.env
 ```
-After this step you will see a new file named ```config.py``` in tobrot directory.
+After this step you will see a new file named ```config.env``` in root directory.
 
-Follow and fill all the required variables that were already filled in the sample config file, but with your details. And you can also fill all other variables according to your need and all those are explained below.
+Fill those compulsory variables.
 
 If you need more explanation about any variable then read [app.jso](https://github.com/gautamajay52/TorrentLeech-Gdrive/blob/master/app.jso)
 
@@ -113,7 +109,7 @@ sudo docker build . -t torrentleech-gdrive
 ```
 sudo docker run torrentleech-gdrive
 ```
-
+Follow this [Video Tutorial](https://youtu.be/J3tMbngA9DE)
 ### The Legacy Way
 Simply clone the repository and run the main file:
 
@@ -123,21 +119,9 @@ cd TorrentLeech-Gdrive
 python3 -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
-# <Create config.py appropriately>
+# <Create config.env appropriately>
 python3 -m tobrot
 ```
-
-### an example config.py 👇
-```py
-from tobrot.sample_config import Config
-
-class Config(Config):
-  TG_BOT_TOKEN = ""
-  APP_ID = 6
-  API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-  AUTH_CHANNEL = [-1001234567890]
-```
-
 ### Variable Explanations
 
 ##### Mandatory Variables
@@ -150,13 +134,7 @@ class Config(Config):
 
 * `AUTH_CHANNEL`: Create a Super Group in Telegram, add `@GoogleIMGBot` to the group, and send /id in the chat, to get this value.
 
-* `RCLONE_CONFIG`: Create the rclone config using the rclone.org and read the rclone section for the next.
-
-* `DESTINATION_FOLDER`: Name of your folder in ur respective drive where you want to upload the files using the bot.
-
 * `OWNER_ID`: ID of the bot owner, He/she can be abled to access bot in bot only mode too(private mode).
-
-* `INDEX_LINK`
 
 ## FAQ
 
@@ -196,11 +174,15 @@ class Config(Config):
 
 * `YTDL_COMMAND`
 
+* `GYTDL_COMMAND`
+
 * `GLEECH_COMMAND`
 
-* `TELEGRAM_LEECH_COMMAND_G`
+* `TELEGRAM_LEECH_COMMAND`
 
-* `PYTDL_COMMAND_G`
+* `TELEGRAM_LEECH_UNZIP_COMMAND`
+
+* `PYTDL_COMMAND`
 
 * `CLONE_COMMAND_G`
 
@@ -217,6 +199,9 @@ class Config(Config):
 * `UPLOAD_AS_DOC`: Takes two option True or False. If True file will be uploaded as document. This is for people who wants video files as document instead of streamable.
 
 * `INDEX_LINK`: (Without `/` at last of the link, otherwise u will get error) During creating index, plz fill `Default Root ID` with the id of your `DESTINATION_FOLDER` after creating. Otherwise index will not work properly.
+
+* `DESTINATION_FOLDER`: Name of your folder in ur respective drive where you want to upload the files using the bot.
+
 ## Available Commands
 
 * `/rclone`: This will change your drive config on fly.(First one will be default)
@@ -231,37 +216,25 @@ class Config(Config):
 
 * `/pytdl`: This command will download videos from youtube playlist link and will upload to telegram.
 
-* `/ytdl gdrive`: This will download and upload to your cloud.
+* `/gytdl`: This will download and upload to your cloud.
 
-* `/pytdl gdrive`: This download youtube playlist and upload to your cloud.
+* `/gpytdl`: This download youtube playlist and upload to your cloud.
 
 * `/leech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified torrent]
 
-* `/leech archive`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [This command will create a .tar.gz file of the output directory, and send the files in the chat, splited into PARTS of 1024MiB each, due to Telegram limitations]
+* `/leechzip`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [This command will create a .tar.gz file of the output directory, and send the files in the chat, splited into PARTS of 1024MiB each, due to Telegram limitations]
 
 * `/gleech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. And this will download the files from the given link or torrent and will upload to the cloud using rclone.
 
-* `/gleech archive` This command will compress the folder/file and will upload to your cloud.
+* `/gleechzip` This command will compress the folder/file and will upload to your cloud.
 
-* `/leech unzip`: This will unzip the .zip file and dupload to telegram.
+* `/leechunzip`: This will unarchive file and dupload to telegram.
 
-* `/gleech unzip`: This will unzip the .zip file and upload to cloud.
-
-* `/leech unrar`: This will unrar the .rar file and dupload to telegram.
-
-* `/gleech unrar`: This will unrar the .rar file and upload to cloud.
-
-* `/leech untar`: This will untar the .tar file and upload to telegram.
-
-* `/gleech untar`: This will untar the .tar file and upload to cloud..
+* `/gleechunzip`: This will unarchive file and upload to cloud.
 
 * `/tleech`: This will mirror the telegram files to ur respective cloud cloud.
 
-* `/tleech unzip`: This will unzip the .zip telegram file and upload to cloud.
-
-* `/tleech unrar`: This will unrar the .rar telegram file and upload to cloud.
-
-* `/tleech untar`: This will untar the .tar telegram file and upload to cloud.
+* `/tleechunzip`: This will unarchive telegram file and upload to cloud.
 
 * `/getsize`: This will give you total size of your destination folder in cloud.
 
